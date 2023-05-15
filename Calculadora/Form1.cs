@@ -12,89 +12,64 @@ namespace Calculadora
 {
     public partial class Form1 : Form
     {
+        string selectedOperator;
+        int acumulatedValue;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void NumberAction_Click(object sender, EventArgs e)
         {
-
+            
+            Button btnNumbers = (Button)sender;             
+            int btnValue = int.Parse(btnNumbers.Text);      //Valor que se clickea
+            int currentValue = int.Parse(txtValue.Text);  //Valor entero que se acumula en la caja de texto
+            
+            currentValue = currentValue * 10 + btnValue;
+            txtValue.Text = currentValue.ToString();
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void OperatorAction_Click(object sender, EventArgs e)
         {
-
+            Button btnOperators = (Button)sender;
+            selectedOperator = btnOperators.Text;
+            acumulatedValue = int.Parse(txtValue.Text);
+            txtValue.Text = "0";
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void BtnEquals_Click(object sender, EventArgs e)
         {
+            int secondAcumulatedValue = int.Parse(txtValue.Text);
+            int result = 0;
 
+            switch (selectedOperator)
+            {
+                    case "+":
+                    result = acumulatedValue + secondAcumulatedValue;
+                    break;
+
+                    case "-":
+                    result = acumulatedValue - secondAcumulatedValue;
+                    break;
+
+                    case "*":
+                    result = acumulatedValue * secondAcumulatedValue;
+                    break;
+
+                    case "/":
+                    result = acumulatedValue / secondAcumulatedValue;
+                    break;
+            }
+            
+            txtValue.Text = result.ToString();
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void BtnClear_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
+            txtValue.Text = "0";
+            acumulatedValue = 0;
+            selectedOperator = string.Empty;
         }
     }
 }
